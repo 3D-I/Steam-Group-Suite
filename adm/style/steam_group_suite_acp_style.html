@@ -1,0 +1,167 @@
+	<fieldset class="steamsuite-acp-outer">
+		<legend>{{ lang('ACP_STEAM_SETTINGS_STYLE') }}</legend>
+		{% if not S_IS_RHEA %}
+		<fieldset class="steamsuite-acp-middle">
+			<legend>{{ lang('ACP_STEAM_STYLE_ICONS') }}</legend>
+			<fieldset class="steamsuite-acp-inner">
+				<legend>{{ lang('ACP_STEAM_STYLE_ICONS_SETTINGS') }}</legend>
+				<dl>
+					<dt>
+						<label for="icondark">{{ lang('STEAMSUITE_ICON_DARK') }}{{ lang('COLON') }}</label>
+					</dt>
+					<dd>
+						<input type="radio" class="radio" name="icondark" value="1" {% if S_31_ICON_DARK %}checked="checked"{% endif %}/> {{ lang('STEAMSUITE_ICON_DARK_YES') }} &nbsp;
+						<input type="radio" class="radio" name="icondark" value="0" {% if not S_31_ICON_DARK %}checked="checked"{% endif %} /> {{ lang('STEAMSUITE_ICON_DARK_NO') }}
+					</dd>
+				</dl>
+			</fieldset>
+		</fieldset>
+		{% endif %}
+
+		<fieldset class="steamsuite-acp-middle">
+			<legend>{{ lang('ACP_STEAM_STYLE_VIEWPORT') }}</legend>
+			<fieldset class="steamsuite-acp-inner">
+				<legend>{{ lang('ACP_STEAM_TEMPLATE_COLORS') }}</legend>
+				{#
+					The HTML5 type color input field opens the operating system's color widget.
+					Returns the HexDec value of the chosen color in format #000000
+					If not supported, returns a type text color-picker.
+
+					An automated HexDec input field has been provided here, though.
+				#}
+				<dl>
+					<dt>
+						<label for="vp_bkg">{{ lang('STEAMSUITE_VIEWPORT_BKG') }}{{ lang('COLON') }}</label>
+					</dt>
+					<dd>
+						<input type="text" name="vp_bkg" id="vp_bkg" class="input" value="{{ VIEWPORT_BKG }}"  pattern="#[a-fA-F0-9]{6,6}" size="7" title="{{ lang('STEAMSUITE_COLORPICKER_EXPLAIN') }}" onchange="document.getElementById('vp_bkg_hex').value = this.value;" />
+
+						<input type="color" name="vp_bkg_hex" id="vp_bkg_hex" class="input" value="{{ VIEWPORT_BKG }}" placeholder="{{ VIEWPORT_BKG }}" title="{{ lang('STEAMSUITE_COLORPICKER_EXPLAIN') }}" onchange="document.getElementById('vp_bkg').value = this.value;"/>&nbsp;
+						
+						{{ lang('STEAMSUITE_SETTINGS_HEX_STORED') }}{{ lang('COLON') }}&nbsp;
+						<input type="text" class="input" value="{{ VIEWPORT_BKG }}" size="7" title="{{ lang('STEAMSUITE_COLORPICKER_STORED') }}"/>
+
+						<input type="color" class="input" value="{{ VIEWPORT_BKG }}" placeholder="{{ VIEWPORT_BKG }}" title="{{ lang('STEAMSUITE_COLORPICKER_STORED') }}" disabled/>
+					</dd>
+				</dl>
+
+				<dl>
+					<dt>
+						<label for="vp_ing">{{ lang('STEAMSUITE_VIEWPORT_INGAME') }}{{ lang('COLON') }}</label>
+					</dt>
+					<dd>
+						<input type="text" name="vp_ing" id="vp_ing" class="input" value="{{ VIEWPORT_INGAME }}" pattern="#[a-fA-F0-9]{6,6}" size="7" title="{{ lang('STEAMSUITE_COLORPICKER_EXPLAIN') }}" onchange="document.getElementById('vp_ing_hex').value = this.value;" />
+
+						<input type="color" name="vp_ing_hex" id="vp_ing_hex" class="input" value="{{ VIEWPORT_INGAME }}" placeholder="{{ VIEWPORT_INGAME }}" title="{{ lang('STEAMSUITE_COLORPICKER_EXPLAIN') }}" onchange="document.getElementById('vp_ing').value = this.value;"/>&nbsp;
+
+						{{ lang('STEAMSUITE_SETTINGS_HEX_STORED') }}{{ lang('COLON') }}&nbsp;
+						<input type="text" class="input" value="{{ VIEWPORT_INGAME }}" size="7" title="{{ lang('STEAMSUITE_COLORPICKER_STORED') }}"/>
+
+						<input type="color" class="input" value="{{ VIEWPORT_INGAME }}" placeholder="{{ VIEWPORT_INGAME }}" title="{{ lang('STEAMSUITE_COLORPICKER_STORED') }}" disabled/>
+					</dd>
+				</dl>
+
+				<dl>
+					<dt>
+						<label for="vp_onl">{{ lang('STEAMSUITE_VIEWPORT_ONLINE') }}{{ lang('COLON') }}</label>
+					</dt>
+					<dd>
+						<input type="text" name="vp_onl" id="vp_onl" class="input" value="{{ VIEWPORT_ONLINE }}" pattern="#[a-fA-F0-9]{6,6}" size="7" title="{{ lang('STEAMSUITE_COLORPICKER_EXPLAIN') }}" onchange="document.getElementById('vp_onl_hex').value = this.value;" />
+
+						<input type="color" name="vp_onl_hex" id="vp_onl_hex" class="input" value="{{ VIEWPORT_ONLINE }}" placeholder="{{ VIEWPORT_ONLINE }}" title="{{ lang('STEAMSUITE_COLORPICKER_EXPLAIN') }}" onchange="document.getElementById('vp_onl').value = this.value;"/>&nbsp;
+
+						{{ lang('STEAMSUITE_SETTINGS_HEX_STORED') }}{{ lang('COLON') }}&nbsp;
+						<input type="text" class="input" value="{{ VIEWPORT_ONLINE }}" size="7" title="{{ lang('STEAMSUITE_COLORPICKER_STORED') }}"/>
+
+						<input type="color" class="input" value="{{ VIEWPORT_ONLINE }}" placeholder="{{ VIEWPORT_ONLINE }}" title="{{ lang('STEAMSUITE_COLORPICKER_STORED') }}" disabled/>
+					</dd>
+				</dl>
+
+				<dl>
+					<dt>
+						<label for="vp_ofl">{{ lang('STEAMSUITE_VIEWPORT_OFFLINE') }}{{ lang('COLON') }}</label>
+					</dt>
+					<dd>
+						<input type="text" name="vp_ofl" id="vp_ofl" class="input" value="{{ VIEWPORT_OFFLINE }}" pattern="#[a-fA-F0-9]{6,6}" size="7" title="{{ lang('STEAMSUITE_COLORPICKER_EXPLAIN') }}" onchange="document.getElementById('vp_ofl_hex').value = this.value;" />
+
+						<input type="color" name="vp_ofl_hex" id="vp_ofl_hex" class="input" value="{{ VIEWPORT_OFFLINE }}" placeholder="{{ VIEWPORT_OFFLINE }}" title="{{ lang('STEAMSUITE_COLORPICKER_EXPLAIN') }}" onchange="document.getElementById('vp_ofl').value = this.value;"/>&nbsp;
+
+						{{ lang('STEAMSUITE_SETTINGS_HEX_STORED') }}{{ lang('COLON') }}&nbsp;
+						<input type="text" class="input" value="{{ VIEWPORT_OFFLINE }}" size="7" title="{{ lang('STEAMSUITE_COLORPICKER_STORED') }}"/>
+
+						<input type="color" class="input" value="{{ VIEWPORT_OFFLINE }}" placeholder="{{ VIEWPORT_OFFLINE }}" title="{{ lang('STEAMSUITE_COLORPICKER_STORED') }}" disabled/>
+					</dd>
+				</dl>
+			</fieldset>
+		</fieldset>
+
+		<fieldset class="steamsuite-acp-middle">
+			<legend>{{ lang('ACP_STEAM_STYLE_PROFILE') }}</legend>
+			<fieldset class="steamsuite-acp-inner">
+				<legend>{{ lang('ACP_STEAM_TEMPLATE_COLORS') }}</legend>
+				<dl>
+					<dt>
+						<label for="vt_bkg">{{ lang('STEAMSUITE_VIEWTOPIC_BKG') }}{{ lang('COLON') }}</label>&nbsp;{{ lang('STEAMSUITE_VIEWTOPIC_BKG_EXPLAIN') }}
+					</dt>
+					<dd>
+						<input type="text" name="vt_bkg" id="vt_bkg" class="input" value="{{ VIEWTOPIC_BKG }}" pattern="#[a-fA-F0-9]{6,6}" size="7" title="{{ lang('STEAMSUITE_COLORPICKER_EXPLAIN') }}" onchange="document.getElementById('vt_bkg_hex').value = this.value;" />
+
+						<input type="color" name="vt_bkg_hex" id="vt_bkg_hex" class="input" value="{{ VIEWTOPIC_BKG }}" placeholder="{{ VIEWTOPIC_BKG }}" title="{{ lang('STEAMSUITE_COLORPICKER_EXPLAIN') }}" onchange="document.getElementById('vt_bkg').value = this.value;"/>&nbsp;
+
+						{{ lang('STEAMSUITE_SETTINGS_HEX_STORED') }}{{ lang('COLON') }}&nbsp;
+						<input type="text" class="input" value="{{ VIEWTOPIC_BKG }}" size="7" title="{{ lang('STEAMSUITE_COLORPICKER_STORED') }}"/>
+
+						<input type="color" class="input" value="{{ VIEWTOPIC_BKG }}" placeholder="{{ VIEWTOPIC_BKG }}" title="{{ lang('STEAMSUITE_COLORPICKER_STORED') }}" disabled/>
+					</dd>
+				</dl>
+
+				<dl>
+					<dt>
+						<label for="vt_ing">{{ lang('STEAMSUITE_VIEWTOPIC_INGAME') }}{{ lang('COLON') }}</label>&nbsp;{{ lang('STEAMSUITE_VIEWTOPIC_TEXT_EXPLAIN') }}
+					</dt>
+					<dd>
+						<input type="text" name="vt_ing" id="vt_ing" class="input" value="{{ VIEWTOPIC_INGAME }}" pattern="#[a-fA-F0-9]{6,6}" size="7" title="{{ lang('STEAMSUITE_COLORPICKER_EXPLAIN') }}" onchange="document.getElementById('vt_ing_hex').value = this.value;" />
+
+						<input type="color" name="vt_ing_hex" id="vt_ing_hex" class="input" value="{{ VIEWTOPIC_INGAME }}" placeholder="{{ VIEWTOPIC_INGAME }}" title="{{ lang('STEAMSUITE_COLORPICKER_EXPLAIN') }}" onchange="document.getElementById('vt_ing').value = this.value;"/>&nbsp;
+
+						{{ lang('STEAMSUITE_SETTINGS_HEX_STORED') }}{{ lang('COLON') }}&nbsp;
+						<input type="text" class="input" value="{{ VIEWTOPIC_INGAME }}" size="7" title="{{ lang('STEAMSUITE_COLORPICKER_STORED') }}"/>
+
+						<input type="color" class="input" value="{{ VIEWTOPIC_INGAME }}" placeholder="{{ VIEWTOPIC_INGAME }}" title="{{ lang('STEAMSUITE_COLORPICKER_STORED') }}" disabled/>
+					</dd>
+				</dl>
+
+				<dl>
+					<dt>
+						<label for="vt_onl">{{ lang('STEAMSUITE_VIEWTOPIC_ONLINE') }}{{ lang('COLON') }}</label>&nbsp;{{ lang('STEAMSUITE_VIEWTOPIC_TEXT_EXPLAIN') }}
+					</dt>
+					<dd>
+						<input type="text" name="vt_onl" id="vt_onl" class="input" value="{{ VIEWTOPIC_ONLINE }}" pattern="#[a-fA-F0-9]{6,6}" size="7" title="{{ lang('STEAMSUITE_COLORPICKER_EXPLAIN') }}" onchange="document.getElementById('vt_onl_hex').value = this.value;" />
+
+						<input type="color" name="vt_onl_hex" id="vt_onl_hex" class="input" value="{{ VIEWTOPIC_ONLINE }}" placeholder="{{ VIEWTOPIC_ONLINE }}" title="{{ lang('STEAMSUITE_COLORPICKER_EXPLAIN') }}" onchange="document.getElementById('vt_onl').value = this.value;"/>&nbsp;
+
+						{{ lang('STEAMSUITE_SETTINGS_HEX_STORED') }}{{ lang('COLON') }}&nbsp;
+						<input type="text" class="input" value="{{ VIEWTOPIC_ONLINE }}" size="7" title="{{ lang('STEAMSUITE_COLORPICKER_STORED') }}"/>
+
+						<input type="color" class="input" value="{{ VIEWTOPIC_ONLINE }}" placeholder="{{ VIEWTOPIC_ONLINE }}" title="{{ lang('STEAMSUITE_COLORPICKER_STORED') }}" disabled/>
+					</dd>
+				</dl>
+
+				<dl>
+					<dt>
+						<label for="vt_ofl">{{ lang('STEAMSUITE_VIEWTOPIC_OFFLINE') }}{{ lang('COLON') }}</label>&nbsp;{{ lang('STEAMSUITE_VIEWTOPIC_TEXT_EXPLAIN') }}
+					</dt>
+					<dd>
+						<input type="text" name="vt_ofl" id="vt_ofl" class="input" value="{{ VIEWTOPIC_OFFLINE }}" pattern="#[a-fA-F0-9]{6,6}" size="7" title="{{ lang('STEAMSUITE_COLORPICKER_EXPLAIN') }}" onchange="document.getElementById('vt_ofl_hex').value = this.value;" />
+
+						<input type="color" name="vt_ofl_hex" id="vt_ofl_hex" class="input" value="{{ VIEWTOPIC_OFFLINE }}" placeholder="{{ VIEWTOPIC_OFFLINE }}" title="{{ lang('STEAMSUITE_COLORPICKER_EXPLAIN') }}" onchange="document.getElementById('vt_ofl').value = this.value;"/>&nbsp;
+
+						{{ lang('STEAMSUITE_SETTINGS_HEX_STORED') }}{{ lang('COLON') }}&nbsp;
+						<input type="text" class="input" value="{{ VIEWTOPIC_OFFLINE }}" size="7" title="{{ lang('STEAMSUITE_COLORPICKER_STORED') }}"/>
+
+						<input type="color" class="input" value="{{ VIEWTOPIC_OFFLINE }}" placeholder="{{ VIEWTOPIC_OFFLINE }}" title="{{ lang('STEAMSUITE_COLORPICKER_STORED') }}" disabled/>
+					</dd>
+				</dl>
+			</fieldset>
+		</fieldset>
+	</fieldset>

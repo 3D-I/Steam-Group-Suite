@@ -1,0 +1,37 @@
+{
+	"name": "threedi/steamsuite",
+	"type": "phpbb-extension",
+	"description": "Extension for Steam's lovers.",
+	"homepage": "http://3di.space/32/",
+	"version": "1.0.0-rc1",
+	"time": "2017-08-29",
+	"license": "GPL-2.0",
+	"authors": [
+		{
+			"name": "3Di",
+			"email": "three3di@hotmail.it",
+			"homepage": "http://3di.space/32/",
+			"role": "Developer"
+		},
+		{
+			"name": "javiexin",
+			"email": "javiexin@gmail.com",
+			"homepage": "",
+			"role": "Developer"
+		}
+	],
+	"require": {
+		"php": ">=5.3.3"
+	},
+	"extra": {
+		"display-name": "Steam Group Suite",
+		"soft-require": {
+			"phpbb/phpbb": ">=3.1.9,<3.3.0@dev"
+		},
+		"version-check": {
+			"host": "3d-i.github.io",
+			"directory": "/site/vchecks",
+			"filename": "steamsuite-vcheck.json"
+		}
+	}
+}

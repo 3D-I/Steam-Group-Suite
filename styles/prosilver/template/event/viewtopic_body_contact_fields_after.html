@@ -1,0 +1,45 @@
+{% if S_STEAMSUITE and postrow.S_STEAM_USER and not postrow.S_POST_HIDDEN %}
+	<dd class="profile-steam">
+		<strong>{{ lang('STEAM_PROFILE') }}{{ lang('COLON') }}</strong>
+		{% if S_STEAMSUITE_MP_CLICK %}
+			<div class="dropdown-container dropdown-left">
+				<a href="#" class="dropdown-trigger" title="{postrow.STEAM_NAME}">
+		{% endif %}
+		{% if S_IS_RHEA %}
+			<i class="icon fa-steam fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">{postrow.STEAM_NAME}</span>
+		{% else %}
+			<span class="imageset icon-steam{{ S_31_ICON_DARK }}" title="{% if postrow.STEAM_NAME %}{postrow.STEAM_NAME}{% else %}{{ lang('STEAM_PROFILE_PRIVATE') }}{% endif %}">{postrow.STEAM_NAME}</span>
+		{% endif %}
+		{% if S_STEAMSUITE_MP_CLICK %}
+			</a>
+			<div class="dropdown{% if not S_IS_RHEA %} hidden{% endif %}">
+				<div class="pointer"><div class="pointer-inner"></div></div>
+				<div class="dropdown-contents">
+		{% endif %}
+		{% if postrow.STEAM_NAME %}
+			<div class="steam-cell vt">
+				<div class="flex-avatar{% if ( postrow.S_STEAM_PROFILE_PUBLIC or S_STEAMSUITE_ADMIN ) and postrow.STEAM_STATE_ID %}{% if postrow.STEAM_INGAME_ID %} steam-ingame{% else %} steam-online{% endif %}{% endif %}{% if not postrow.S_STEAM_PROFILE_VISIBLE and S_STEAMSUITE_ADMIN %} steam-admin{% endif %}">
+					<a href="{{ postrow.U_STEAM_PROFILE }}" title="{{ postrow.STEAM_NAME }}">
+						<img src="{{ postrow.STEAM_AVATAR }}" alt="{{ postrow.STEAM_NAME }}"/>
+					</a>
+				</div>
+				<div class="flex-column{% if postrow.S_STEAM_PROFILE_PUBLIC and postrow.STEAM_STATE_ID %}{% if postrow.STEAM_INGAME_ID %} steam-ingame{% else %} steam-online{% endif %}{% endif %}">
+					<div class="flex-text"><a href="{{ postrow.U_STEAM_PROFILE }}">{{ postrow.STEAM_NAME }}</a></div>
+					{% if postrow.S_STEAM_PROFILE_PUBLIC or S_STEAMSUITE_ADMIN %}
+					<div class="flex-text">{% if not postrow.S_STEAM_PROFILE_PUBLIC %}{% if S_IS_RHEA %}<i class="icon fa-lock fa-fw icon-sm" aria-hidden="true" title="{{ lang('STEAM_UNKNOWN') }}">&nbsp;</i>{% else %}<span class="imageset icon-steam-private{{ S_31_ICON_DARK }}" title="{{ lang('STEAM_UNKNOWN') }}"></span>{% endif %}{% endif %}{{ postrow.STEAM_STATE }}</div>
+					<div class="flex-text">{% if not postrow.S_STEAM_PROFILE_PUBLIC %}{% if S_IS_RHEA %}<i class="icon fa-lock fa-fw icon-sm" aria-hidden="true" title="{{ lang('STEAM_UNKNOWN') }}">&nbsp;</i>{% else %}<span class="imageset icon-steam-private{{ S_31_ICON_DARK }}" title="{{ lang('STEAM_UNKNOWN') }}"></span>{% endif %}{% endif %}{{ postrow.STEAM_INGAME }}</div>
+					{% else %}
+					<div class="flex-text">{{ lang('STEAM_UNKNOWN') }}</div>
+					{% endif %}
+				</div>
+			</div>
+		{% elseif S_STEAMSUITE_MP_CLICK %}
+			<span>{{ lang('STEAM_PROFILE_PRIVATE') }}</span>
+		{% endif %}
+		{% if S_STEAMSUITE_MP_CLICK %}
+				</div>
+			</div>
+		</div>
+		{% endif %}
+	</dd>
+{% endif %}

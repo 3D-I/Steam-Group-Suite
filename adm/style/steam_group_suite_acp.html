@@ -1,0 +1,54 @@
+{% if not INCLUDED_STEAMSUITE_ACP_CSS %}
+	{% INCLUDECSS '@threedi_steamsuite/steamsuite_acp.css' %}
+	{% set INCLUDED_STEAMSUITE_ACP_CSS = true %}
+{% endif %}
+
+{% INCLUDE 'overall_header.html' %}
+
+<h1>{{ lang('ACP_STEAM_SETTINGS_TITLE') }}</h1>
+
+{# Require to configure the keys first #}
+{% if not S_APIKEYS %}
+<fieldset>
+	<legend>{{ lang('ACP_STEAM_ERRORS') }}</legend>
+	<div class="errorbox">
+		<p>{{ lang('STEAMSUITE_MISSING_ACP_KEYS') }}</p>
+	</div>
+</fieldset>
+{% elseif S_ERRORS or S_STEAMSUITE_OVERDUE %}
+{# Non invasive error reporting #}
+<fieldset>
+	<legend>{{ lang('ACP_STEAM_ERRORS') }}</legend>
+	<p class="error">
+		{% if S_STEAMSUITE_OVERDUE %}{{ lang('STEAMSUITE_REFRESH_OVERDUE') }}
+		{% if S_ERRORS %}<br><br>{% endif %}{% endif %}
+		{{ ERRORS_MSG }}
+	</p>
+</fieldset>
+{% endif %}
+
+<form id="threedi_steamsuite" method="post" action="{{ U_ACTION }}">
+
+	{% if STEAMSUITE_MODE == 'settings' %}
+	{% INCLUDE 'steam_group_suite_acp_core.html' %}
+	{% elseif STEAMSUITE_MODE == 'config' %}
+	{% INCLUDE 'steam_group_suite_acp_config.html' %}
+	{% elseif STEAMSUITE_MODE == 'style' %}
+	{% INCLUDE 'steam_group_suite_acp_style.html' %}
+	{% endif %}
+
+	<fieldset class="steamsuite-acp-submit">
+		<p class="submit-buttons">
+			<input class="button1" type="submit" id="update" name="update" value="{{ lang('SUBMIT') }}" />&nbsp;
+			{% if STEAMSUITE_MODE == 'settings' %}
+			<input class="button2" type="submit" id="cancel" name="cancel" value="{{ lang('CANCEL') }}" formaction="{{ U_ACTION }}" formmethod="post"/>
+			{% else %}
+			<input class="button2" type="reset" id="reset" name="reset" value="{{ lang('RESET') }}" />
+			{% endif %}
+		</p>
+
+		{{ S_FORM_TOKEN }}
+	</fieldset>
+</form>
+
+{% INCLUDE 'overall_footer.html' %}

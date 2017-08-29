@@ -1,0 +1,468 @@
+/**
+ *
+ * Steam suite. An extension for the phpBB Forum Software package.
+ *
+ * @copyright (c) 2017, 3Di (http://3di.space/32/) & javiexin
+ * @license GNU General Public License, version 2 (GPL-2.0)
+ *
+ */
+
+/* Steam viewport configuration */
+
+/* Border area of viewport */
+#steam-header {
+	text-align: center;
+	padding-bottom: 2px;
+	color: white;
+}
+
+/* Space taken by the selectors */
+#steam-header .stats-online {
+	max-width: 160px;
+}
+
+#steam-header .stats-ingame {
+	max-width: 280px;
+}
+
+/* Visual cue for disabled items */
+#steam-header option:disabled {
+	color: palevioletred;
+}
+
+/* Main viewport container, uses flex row wrap */
+#steam-container {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-ms-flex-flow: row wrap;
+	flex-flow: row wrap;
+	overflow: auto;
+	max-height: 160px; /* To avoid showing the complete viewport on devices without JS */
+}
+
+/* Each element within the viewport container */
+.flex-item {
+	-webkit-box-flex: 1;
+	-ms-flex: 1 1 auto;
+	flex: 1 1;
+}
+
+/*
+Different modes for the items:
+- Packed (avatar left, text right, align left)
+- Center (avatar top, tex bottom, align center)
+- Normal (avatar size normal, 64x64)
+- Small  (avatar size small, 32x32)
+*/
+
+/*
+Cell dimensions are based in three factors:
+- Avatar size (32x32 or 64x64)
+- Panel layout (packed or centered)
+- Max text length for labels (packed 120, centered 150)
+Total height is calculated real time,
+but width must be specified for correct flex behaviour
+*/
+/*
+Item size:
+- Packed / small : 48x173 - 32+6+10 x 32+6+10+5+120
+- Packed / medium : 80x205 - 64+6+10 x 64+6+10+5+120
+- Center / small : 90x160 - 32+6+10+42 x 10+150
+- Center / medium : 122x160 - 64+6+10+42 x 10+150
+*/
+
+/* Preferred width for packed medium - default */
+.flex-item {
+	-ms-flex: 1 1 205px;
+	flex: 1 1 205px;
+}
+
+/* Preferred width for packed small */
+.panel-small:not(.panel-center) .flex-item {
+	-ms-flex: 1 1 173px;
+	flex: 1 1 173px;
+}
+
+/* Preferred width for center any size */
+.panel-center .flex-item {
+	-ms-flex: 1 1 160px;
+	flex: 1 1 160px;
+}
+
+/* The wrapper for each user content - default packed */
+.flex-cell {
+	border-width: 2px;
+	padding: 3px;
+	border-style: solid;
+	border-color: #729ea5;
+	width: auto;
+	vertical-align: middle;
+	display: flex;
+	align-items: start;
+}
+
+/* The wrapper for each user content - center */
+.panel-center .flex-cell {
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+}
+
+/* Avatar container */
+.flex-avatar {
+	border-width: 2px;
+	padding: 1px;
+	border-style: solid;
+	vertical-align: middle;
+	display: inline-flex;
+}
+
+/* Avatar image normal size */
+.flex-avatar img {
+	width: 64px;
+	height: 64px;
+}
+
+/* Avatar image small size */
+.panel-small .flex-avatar img {
+	width: 32px;
+	height: 32px;
+}
+
+/* Images are lazy loaded, so they are hidden by default */
+.flex-avatar img.lazy-steam-avatar {
+	display: none;
+}
+
+/*
+Colors are set according to user configuration in ACP.
+Shown here for completeness, they are overridden always
+Values shown are appropriate for prosilver, not exactly in line with Steam
+*/
+
+/* Item background color */
+.flex-item {
+	background-color: #cadceb;
+}
+
+/* Avatar frame color - default offline */
+.flex-cell > .flex-avatar {
+	border-color: #4d4d4d;
+}
+
+/* Avatar frame color - online */
+.flex-cell:not(.steam-state-0) > .flex-avatar {
+	border-color: #4199c4;
+}
+
+/* Avatar frame color - online ingame */
+.flex-cell:not(.steam-state-0):not(.steam-game-0) > .flex-avatar {
+	border-color: #90ac31;
+}
+
+/* Text container - default packed */
+.flex-column {
+	margin-left: 5px;
+}
+
+/* Text container - center */
+.panel-center .flex-column {
+	margin-left: 0;
+}
+
+/* Each text entry, with or without a link - default packed */
+.flex-text,
+.flex-text a {
+	flex: 1;
+	font-size: 1em;
+	text-decoration: none;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	width: 120px;
+	line-height: 1.2em;
+}
+
+/* Each text entry - center */
+.panel-center .flex-text,
+.panel-center .flex-text a {
+	text-align: center;
+	width: 150px;
+}
+
+/* Links are bolded */
+.flex-text a {
+	font-weight: bold;
+}
+
+/*
+Colors are set according to user configuration in ACP.
+Shown here for completeness, they are overridden always
+Values shown are appropriate for prosilver, not exactly in line with Steam
+*/
+
+/* Text color - default offline */
+.flex-cell .flex-column,
+.flex-cell .flex-column a {
+	color: #4d4d4d;
+}
+
+/* Text color - online */
+.flex-cell:not(.steam-state-0) > .flex-column,
+.flex-cell:not(.steam-state-0) > .flex-column a {
+	color: #4199c4;
+}
+
+/* Text color - online ingame */
+.flex-cell:not(.steam-state-0):not(.steam-game-0) > .flex-column,
+.flex-cell:not(.steam-state-0):not(.steam-game-0) > .flex-column a {
+	color: #90ac31;
+}
+
+
+/* Steam miniprofile configuration (viewtopic) */
+
+/* New field shown in miniprofile, similar to "Contacts" */
+.profile-steam {
+}
+
+dd.profile-steam {
+	overflow: visible;
+}
+
+/* Label for miniprofile */
+.profile-steam strong {
+}
+
+/* Active element to open dropdown with Steam information */
+.profile-steam .dropdown-container {
+	display: inline-block;
+}
+
+/* Box (bubble) containing the Steam information, needs positioning on open */
+.profile-steam .dropdown {
+	margin-right: -14px;
+	margin-top: 1px;
+}
+
+/* Steam profile information (viewprofile) shares the rules for avatar */
+
+/* The global container for Steam information and badge (vp only) */
+.steam-item {
+	min-width: 410px;
+}
+
+/* The actual container for the Steam information */
+.steam-cell {
+}
+
+/* Container sizes (vp only) */
+dl.details.steam-cell dt {
+	width: auto;
+	display: inline-block;
+}
+
+dl.details.steam-cell dd {
+	width: 51%;
+}
+
+/* On smaller screens, the view must be stacked rather than side by side (vp only) */
+@media screen and (max-device-width: 900px) {
+	.steam-item {
+		width: 100%;
+	}
+
+	dl.details.steam-cell dt {
+		max-width: 32%;
+	}
+
+	dl.details.steam-cell dt img {
+		max-width: 100%;
+	}
+
+	dl.details.steam-cell dd {
+		width: 63%;
+	}
+
+	.steam-item.column2 {
+		float: left;
+		clear: both;
+	}
+}
+
+
+/* No padding on links */
+.steam-cell a {
+	padding: 0;
+}
+
+/* The avatar component of the information */
+.steam-cell .flex-avatar {
+	vertical-align: top;
+	border-width: 3px;
+	padding: 2px;
+}
+
+.steam-cell.vp .flex-avatar {
+	margin-bottom: 5px;
+}
+
+/* In case the profile is not visible to general users, show to admin with a visual cue */
+.steam-cell .flex-avatar.steam-admin {
+	border-style: dotted;
+}
+
+/* Image as block to avoid having some space around */
+.steam-cell .flex-avatar img {
+	display: block;
+}
+
+/* Avatar image should use the image size in viewprofile, but is fixed in miniprofile */
+.steam-cell.vp .flex-avatar img {
+	width: auto;
+	height: auto;
+}
+
+.steam-cell.vt .flex-avatar img {
+	width: 32px;
+	height: 32px;
+}
+
+/* The textual data provided (vt only) */
+.steam-cell .flex-column {
+	display: inline-block;
+	padding-top: 1px;
+	padding-right: 3px;
+	margin: 0 8px 0 4px;
+}
+
+/* Force height (vt only) */
+.steam-cell .flex-text,
+.steam-cell .flex-text a {
+	height: 13px;
+}
+
+/* Free width (vt dropdown only) */
+.profile-steam .dropdown .steam-cell .flex-text,
+.profile-steam .dropdown .steam-cell .flex-text a {
+	width: auto;
+}
+
+/*
+Colors are set according to user configuration in ACP.
+Shown here for completeness, they are overridden always
+Values shown are appropriate for prosilver, not exactly in line with Steam
+*/
+
+/* Item background color */
+.profile-steam .steam-cell.vt {
+	background-color: #cadceb;
+}
+
+/* Avatar frame color - default offline */
+.steam-cell .flex-avatar {
+	border-color: #4d4d4d;
+}
+
+/* Avatar frame color - online */
+.steam-cell .flex-avatar.steam-online {
+	border-color: #4199c4;
+}
+
+/* Avatar frame color - online ingame */
+.steam-cell .flex-avatar.steam-ingame {
+	border-color: #90ac31;
+}
+
+/* Text color - default offline */
+.profile-steam .steam-cell .flex-column,
+.profile-steam .steam-cell .flex-column a {
+	color: #4d4d4d;
+}
+
+/* Text color - online */
+.profile-steam .steam-cell .flex-column.steam-online,
+.profile-steam .steam-cell .flex-column.steam-online a {
+	color: #4199c4;
+}
+
+/* Text color - online ingame */
+.profile-steam .steam-cell .flex-column.steam-ingame,
+.profile-steam .steam-cell .flex-column.steam-ingame a {
+	color: #90ac31;
+}
+
+/*********************************
+* This section is for statistics *
+*********************************/
+/* That's the native phpBB prosilver class "rules" slightly modified */
+.steamsuite-statistics-block {
+	margin-bottom: 10px;
+	font-size: 1.1em;
+	padding: 5px 10px;
+	border-radius: 7px;
+	background-color: #d6e9cf; /* light green */
+	color: #125814; /* dark green */
+}
+
+.steamsuite-group-description {
+	margin-bottom: 10px;
+	font-size: 1.1em;
+	padding: 5px 10px;
+	border-radius: 7px;
+	background-color: #d6e9cf;  /* light green */
+	color: #125814; /* dark green */
+}
+
+div .steamsuite-group-description {
+	display: none;
+}
+
+/* That's a hackish workaround to make the anchor not interfere */
+.steamsuite-group-description-empty {
+
+}
+
+a.steamsuite-group-description-empty:hover + div {
+	display: block;
+}
+
+.steamsuite-group-avatar {
+	vertical-align: bottom;
+}
+
+/***********************************************
+* This section is for responsive configuration *
+************************************************/
+/* which is not working */
+@media screen and (max-device-width: 640px) {
+	.steam-drop-down-stats-online {
+		max-width: 110px;
+	}
+
+	.steam-drop-down-stats-ingame {
+		max-width: 190px;
+	}
+}
+
+@media screen and (max-device-width: 500px) {
+	.steam-drop-down-stats-online {
+		max-width: 110px;
+	}
+
+	.steam-drop-down-stats-ingame {
+		max-width: 190px;
+	}
+}
+
+/* Right for icons max 16x16px. */
+@media screen and (max-device-width: 400px) {
+	.steam-drop-down-stats-online {
+		max-width: 110px;
+	}
+
+	.steam-drop-down-stats-ingame {
+		max-width: 170px;
+	}
+}

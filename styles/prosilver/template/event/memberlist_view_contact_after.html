@@ -1,0 +1,30 @@
+{% if S_STEAMSUITE and STEAM_NAME %}
+<div class="panel bg2">
+	<div class="inner">
+		<div class="column1 steam-item">
+			<h3>{{ lang('STEAM_STATUS_PROFILE') }}</h3>
+			<dl class="details profile-details steam-cell vp">
+				<dt class="flex-avatar{% if ( S_STEAM_PROFILE_PUBLIC or S_STEAMSUITE_ADMIN ) and STEAM_STATE_ID %}{% if STEAM_INGAME_ID %} steam-ingame{% else %} steam-online{% endif %}{% endif %}{% if not S_STEAM_PROFILE_VISIBLE and S_STEAMSUITE_ADMIN %} steam-admin{% endif %}">
+					<a href="{{ U_STEAM_PROFILE }}">
+						<img src="{% if S_STEAMSUITE_PROFILE_AVATAR_BIG %}{{ STEAM_AVATAR_LARGE }}{% else %}{{ STEAM_AVATAR_MEDIUM }}{% endif %}" alt="{{ STEAM_NAME }}" title="{{ STEAM_NAME }}"/>
+					</a>
+				</dt>
+				<dd><b><a href="{{ U_STEAM_PROFILE }}">{{ STEAM_NAME }}</a></b></dd>
+				<dd>{% if S_STEAM_PROFILE_PUBLIC or S_STEAMSUITE_ADMIN %}{% if not S_STEAM_PROFILE_PUBLIC %}{% if S_IS_RHEA %}<i class="icon fa-lock fa-fw" aria-hidden="true" title="{{ lang('STEAM_UNKNOWN') }}">&nbsp;</i>{% else %}<span class="imageset icon-steam-private{{ S_31_ICON_DARK }}" title="{{ lang('STEAM_UNKNOWN') }}"></span>{% endif %}{% endif %}{{ STEAM_STATE }}{% else %}{{ lang('STEAM_UNKNOWN') }}{% endif %}</dd>
+				<dd>{% if S_STEAM_PROFILE_PUBLIC or S_STEAMSUITE_ADMIN %}{% if not S_STEAM_PROFILE_PUBLIC %}{% if S_IS_RHEA %}<i class="icon fa-lock fa-fw" aria-hidden="true" title="{{ lang('STEAM_UNKNOWN') }}">&nbsp;</i>{% else %}<span class="imageset icon-steam-private{{ S_31_ICON_DARK }}" title="{{ lang('STEAM_UNKNOWN') }}"></span>{% endif %}{% endif %}{{ STEAM_INGAME }}{% else %}{{ lang('STEAM_UNKNOWN') }}{% endif %}</dd>
+			</dl>
+		</div>
+
+		<div class="column2 steam-item">
+			<h3>{{ lang('STEAM_PROFILE_INFO') }}</h3>
+			<dl class="steam-cell vp">
+				<dt class="flex-avatar" style="border-style: none;">
+					<a href="{{ U_STEAM_PROFILE }}">
+						<img src="{{ STEAM_BADGE }}" alt="{{ STEAM_NAME }}" title="{{ STEAM_NAME }}">
+					</a>
+				</dt>
+			</dl>
+		</div>
+	</div>
+</div>
+{% endif %}

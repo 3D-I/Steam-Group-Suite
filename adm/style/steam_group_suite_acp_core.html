@@ -1,0 +1,127 @@
+	<fieldset class="steamsuite-acp-outer">
+		<legend>{{ lang('ACP_STEAM_STATS_API_KEYS') }}</legend>
+		<fieldset class="steamsuite-acp-middle">
+			<legend>{{ lang('ACP_STEAM_CORE_OVERVIEW') }}</legend>
+			<fieldset class="steamsuite-acp-inner">
+				<legend>{{ lang('ACP_STEAM_SETTINGS_BASIC') }}</legend>
+					{% if not S_ERRORS %}
+						{% if not STEAMSUITE_API_KEY and STEAMSUITE_GROUP_ID %}
+						<div class="errorbox">
+							<p>{{ lang('STEAMSUITE_GROUP_ID_NOAPIKEY') }}</p>
+						</div>
+						{% elseif S_STEAMSUITE_GROUP_ID_NOTFOUND %}
+						<div class="errorbox">
+							<p>{{ lang('STEAMSUITE_GROUP_ID_NOTFOUND') }}</p>
+						</div>
+						{% elseif S_STEAMSUITE_GROUP_ID_CHANGED %}
+						<div class="errorbox">
+							<p>{{ lang('STEAMSUITE_GROUP_ID_CHANGED') }}</p>
+						</div>
+						{% endif %}
+					{% endif %}
+				<dl>
+					<dt>
+						<label for="threedi_steamsuite_api_key">{{ lang('STEAMSUITE_API_KEY') }}{{ lang('COLON') }}</label><br />{{ lang('STEAMSUITE_API_KEY_EXPLAIN') }}
+					</dt>
+					<dd>
+						<input type="text" name="threedi_steamsuite_api_key" id="threedi_steamsuite_api_key" class="input" value="{{ STEAMSUITE_API_KEY }}" autocomplete="off" onchange="this.form.submit();" />
+					</dd>
+				</dl>
+		
+				<dl>
+					<dt>
+						<label for="threedi_steamsuite_group_id">{{ lang('STEAMSUITE_GROUP_ID') }}{{ lang('COLON') }}</label><br />{{ lang('STEAMSUITE_GROUP_ID_EXPLAIN') }}
+					</dt>
+					<dd>
+						<input type="text" name="threedi_steamsuite_group_id" id="threedi_steamsuite_group_id" class="input" value="{{ STEAMSUITE_GROUP_ID }}" autocomplete="off" onchange="this.form.submit();" />
+					</dd>
+				</dl>
+			</fieldset>
+
+			{% if STEAMSUITE_GROUP_ID and STEAMSUITE_GROUP_NAME %}
+			<fieldset class="steamsuite-acp-inner">
+				<legend>{{ lang('ACP_STEAM_GROUP_INFORMATION') }}</legend>
+				{% if STEAMSUITE_GROUP_DESCRIPTION %}
+				<dl>
+					<div class="steamsuite-acp-rules"><a class="acp-steamsuite-group-description-empty">{{ lang('ACP_STEAM_GROUP_DESCRIPTION') }}</a><div class="acp-steamsuite-group-description" title="" alt="{{ lang('ACP_STEAM_GROUP_DESCRIPTION_EXPLAIN') }}" >{{ STEAMSUITE_GROUP_DESCRIPTION }}</div></div>
+				</dl>
+				{% endif %}
+
+				<dl>
+					<dt>
+						<label for="steam_group_name">{{ lang('ACP_STEAM_GROUP_NAME') }}{{ lang('COLON') }}</label>
+					</dt>
+					<dd>
+						<strong name="steam_group_name" id="steam_group_name"><a href="{{ U_STEAMSUITE_GROUP_PROFILE }}">{{ STEAMSUITE_GROUP_NAME }}</a></strong>
+					</dd>
+				</dl>
+
+				{% if STEAMSUITE_GROUP_HEADLINE %}
+				<dl>
+					<dt>
+						<label for="steam_group_headline">{{ lang('ACP_STEAM_GROUP_HEADLINE') }}{{ lang('COLON') }}</label>
+					</dt>
+					<dd>
+						<span name="steam_group_headline" id="steam_group_headline">{{ STEAMSUITE_GROUP_HEADLINE }}</span>
+					</dd>
+				</dl>
+				{% endif %}
+
+				{% if U_STEAMSUITE_GROUP_PROFILE and STEAMSUITE_GROUP_AVATAR %}
+				<dl>
+					<dt>
+						<label for="steam_group_profileurl">{{ lang('ACP_STEAM_GROUP_AVATAR_PROFILE') }}{{ lang('COLON') }}</label><br /><span>{{ lang('ACP_STEAM_GROUP_AVATAR_PROFILE_EXPLAIN') }}</span>
+					</dt>
+					<dd>
+						<a name="steam_group_profileurl" id="steam_group_profileurl" href="{{ U_STEAMSUITE_GROUP_PROFILE }}"><img src="{{ STEAMSUITE_GROUP_AVATAR }}" title="{{ STEAMSUITE_GROUP_NAME }}" alt="" /></a>
+					</dd>
+				</dl>
+				{% endif %}
+			</fieldset>
+			{% endif %}
+
+			{# This only makes sense when the communication is configured and active and the group has not changed #}
+			{% if S_APIKEYS and not S_STEAMSUITE_GROUP_ID_CHANGED %}
+			<fieldset class="steamsuite-acp-inner">
+				<legend>{{ lang('ACP_STEAM_STATS_LEGEND') }}</legend>
+				<dl>
+					<dt>
+						<label for="threedi_steamsuite_ttl">{{ lang('STEAMSUITE_TTL') }}{{ lang('COLON') }}</label><br />{{ lang('STEAMSUITE_TTL_EXPLAIN') }}
+					</dt>
+					<dd>
+						<input type="number" min="1" name="threedi_steamsuite_ttl" id="threedi_steamsuite_ttl" size="6" value="{{ STEAMSUITE_TTL }}" />
+					</dd>
+				</dl>
+
+				<dl>
+					<dt>
+						<strong>{{ lang('STEAM_LAST_ATTEMPT') }}</strong>{{ lang('COLON') }}
+					</dt>
+					<dd>
+						{% if STEAMSUITE_REFRESH_LAST_ATTEMPT %}{{ STEAMSUITE_REFRESH_LAST_ATTEMPT }}{% else %}<div class="error"><strong>{{ lang('STEAMSUITE_NEVER') }}</strong></div>{% endif %}
+					</dd>
+				</dl>	
+	
+				<dl>
+					<dt>
+						<strong>{{ lang('STEAM_LAST_SUCCESS') }}</strong>{{ lang('COLON') }}
+					</dt>
+					<dd>
+						{% if STEAMSUITE_REFRESH_LAST_SUCCESS %}{{ STEAMSUITE_REFRESH_LAST_SUCCESS }}{% else %}<div class="error"><strong>{{ lang('STEAMSUITE_NEVER') }}</strong></div>{% endif %}
+					</dd>
+				</dl>
+	
+				{% if STEAMSUITE_REFRESH_LAST_SUCCESS %}
+				<dl>
+					<dt>
+						<strong>{{ lang('STEAM_LAST_TIMEGAP') }}</strong> &nbsp;{{ lang('STEAM_LAST_TIMEGAP_INFO') }}{{ lang('COLON') }}
+					</dt>
+					<dd>
+						{% if not S_STEAMSUITE_OVERDUE %}{{ STEAMSUITE_TIMEGAP }}{% else %}<div class="error"><strong>{{ lang('STEAMSUITE_OVERDUE') }}</strong></div>{% endif %}
+					</dd>
+				</dl>
+				{% endif %}
+			{% endif %}
+			</fieldset>
+		</fieldset>
+	</fieldset>

@@ -1,0 +1,3 @@
+parameters:
+    threedi.steamsuite.tables.steam_suite_table: '%core.table_prefix%steam_suite'
+    threedi.steamsuite.openid_provider: 'http://steamcommunity.com/openid/'

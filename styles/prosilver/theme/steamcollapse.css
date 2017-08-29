@@ -1,0 +1,141 @@
+/**
+ *
+ * Steam suite. An extension for the phpBB Forum Software package.
+ *
+ * This file heavily based on the colapse.css file from the phpBB official
+ * extension Collapsible Categories, by the phpBB Extension Team
+ *
+ * @copyright (c) 2017, 3Di (http://3di.space/32/) & javiexin
+ * @license GNU General Public License, version 2 (GPL-2.0)
+ *
+ */
+
+/* Viewport buttons */
+.steam-btn {
+	background-color: #eef5f9; /* Button bg color */
+	border: 1px solid #2092e3; /* Button border color */
+	position: relative;
+	display: block;
+	box-sizing: border-box;
+	margin: -20px 0 0 0;
+}
+
+.steam-btn:after,
+.steam-btn:before {
+	background: #eef5f9; /* Button bg color */
+	border: 1px solid #2092e3; /* Symbol bg color */
+	position: absolute;
+	content: '';
+}
+
+.steam-btn:hover,
+.steam-btn:hover:after,
+.steam-btn:hover:before {
+	background-color: #ffffff; /* Button hover color */
+	cursor: pointer;
+}
+
+/* Viewport button symbols */
+.steam-minus,
+.steam-plus,
+.steam-cross,
+.steam-circle {
+	border-radius: 4px;
+	width: 16px;
+	height: 16px;
+}
+
+.steam-minus:after,
+.steam-plus:before,
+.steam-cross:before {
+	top: 6px;
+	left: 3px;
+	width: 6px;
+	height: 0;
+}
+
+.steam-plus:after,
+.steam-cross:after {
+	top: 3px;
+	left: 6px;
+	width: 0;
+	height: 6px;
+}
+
+.steam-minus:before {
+	border: none;
+}
+
+.steam-circle:before {
+	top: 3px;
+	left: 3px;
+	width: 8px;
+	height: 8px;
+	border-radius: 4px;
+	background: #2092e3;
+	border: none;
+}
+
+.steam-circle:after {
+	border: none;
+}
+
+.steam-btn.steam-circle:hover:before {
+	background: #aa0000;
+}
+
+.steam-cross:before,
+.steam-cross:after {
+	transform: rotate(45deg);
+}
+
+.steam-btn.steam-cross:hover:before,
+.steam-btn.steam-cross:hover:after {
+	border-color: #aa0000;
+}
+
+/* Collapse, Reset & Save buttons */
+.steam-btn.steam-collapse,
+.steam-btn.steam-reset,
+.steam-btn.steam-save {
+	float: right;
+}
+
+.steam-btn.steam-save {
+	margin-right: 20px;
+}
+
+.steam-btn.steam-reset {
+	margin-right: 40px;
+}
+
+.rtl .steam-btn.steam-collapse,
+.rtl .steam-btn.steam-reset,
+.rtl .steam-btn.steam-save {
+	float: left;
+}
+
+.rtl .steam-btn.steam-save {
+	margin-left: 20px;
+}
+
+.rtl .steam-btn.steam-reset {
+	margin-left: 40px;
+}
+
+/* Grow/shrink buttons */
+.steam-btn.steam-lines {
+	float: left;
+}
+
+.steam-btn.steam-lines.steam-plus {
+	margin-left: 20px;
+}
+
+.rtl .steam-btn.steam-lines {
+	float: right;
+}
+
+.rtl .steam-btn.steam-lines.steam-plus {
+	margin-right: 20px;
+}

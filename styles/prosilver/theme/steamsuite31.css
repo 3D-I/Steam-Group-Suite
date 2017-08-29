@@ -1,0 +1,79 @@
+/**
+ *
+ * Steam suite. An extension for the phpBB Forum Software package.
+ *
+ * @copyright (c) 2017, 3Di (http://3di.space/32/) & javiexin
+ * @license GNU General Public License, version 2 (GPL-2.0)
+ *
+ */
+
+/************************************
+* This section is exclusive for 3.1 *
+************************************/
+
+/* Icons */
+
+/* Miniprofile view similar to "Contact" dropdown */
+.imageset.icon-steam {
+	background-image: url("./images/steamicon.png");
+	background-size: 20px 20px;
+	padding-left: 20px;
+	padding-top: 20px;
+}
+
+.imageset.icon-steam.icon-dark {
+	background-image: url("./images/steamicon_dark.png");
+}
+
+.profile-steam .icon-steam {
+	vertical-align: middle;
+}
+
+/* Private profile visual information */
+.imageset.icon-steam-private {
+	background-image: url("./images/private.gif");
+	background-repeat: no-repeat;
+	background-size: 11px 11px;
+	padding-left: 14px;
+	padding-top: 12px;
+	vertical-align: bottom;
+}
+
+/* Bigger in the profile */
+.steam-cell.vp .imageset.icon-steam-private {
+	background-size: 13px 13px;
+	padding-left: 16px;
+	padding-top: 14px;
+}
+
+.imageset.icon-steam-private.icon-dark {
+	background-image: url("./images/private_dark.gif");
+}
+
+/* Viewport's image for online */
+.imageset.icon-steam-plug {
+	background-image: url("./images/steamonline.png");
+	background-repeat: no-repeat;
+	background-size: 16px;
+	width: 16px;
+	height: 16px;
+	vertical-align: middle;
+}
+
+.imageset.icon-steam-plug.icon-dark {
+	background-image: url("./images/steamonline_dark.png");
+}
+
+/* Viewport's image for ingame */
+.imageset.icon-steam-gamepad {
+	background-image: url("./images/steamingame.png");
+	background-repeat: no-repeat;
+	background-size: 16px;
+	width: 16px;
+	height: 16px;
+	vertical-align: middle;
+}
+
+.imageset.icon-steam-gamepad.icon-dark {
+	background-image: url("./images/steamingame_dark.png");
+}

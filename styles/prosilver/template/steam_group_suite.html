@@ -1,0 +1,134 @@
+{% if not INCLUDED_JQUERYLAZYLOADMIN_JS %}
+{% INCLUDEJS '../js/jquery_lazyload/jquery.lazyload.min.js' %}
+{% set INCLUDED_JQUERYLAZYLOADMIN_JS = true %}
+{% endif %}
+
+{% INCLUDEJS 'js/sgs_viewport.js' %}
+
+{# That's the page #}
+<div>
+	<h3>
+		<a href="{{ U_STEAMSUITE_GROUP_URL }}"><img class="steamsuite-group-avatar" src="{{ STEAMSUITE_GROUP_AVATAR }}" alt="{{ STEAMSUITE_GROUP_HEADLINE }}" title="{{ STEAMSUITE_GROUP_HEADLINE }}"/></a>
+		{{ lang('STEAM_GROUP_TITLE') }}{{ lang('COLON') }}&nbsp;<a href="{{ U_STEAMSUITE_GROUP_URL }}" title="{{ STEAMSUITE_GROUP_URLNAME }}">{{ STEAMSUITE_GROUP_NAME }}</a>&nbsp;&bull;&nbsp;<a class="steamsuite-group-description-empty">{{ lang('STEAM_GROUP_DESCRIPTION') }}</a><div class="steamsuite-group-description">{{ STEAMSUITE_GROUP_DESCRIPTION }}</div>
+	</h3>
+	<div class="steamsuite-statistics-block">
+		{{ lang('STEAM_LIST_USERS', STEAM_USERS) }}{% if STEAM_USERS > 1 %}&nbsp;&bull;&nbsp;{{ lang('STEAM_LIST_ONLINE_INGAME', STEAM_ONLINE_COUNT, STEAM_INGAME_COUNT) }}{% endif %}&nbsp;&bull;&nbsp;{{ lang('STEAM_LAST_SUCCESS') }}{{ lang('COLON') }}&nbsp;{{ STEAMSUITE_REFRESH_LAST_SUCCESS }}
+	</div>
+
+	<div class="forabg" >
+		<div id="steam-header">
+
+			{{ lang('STEAM_SHOWING') }}<b id="steam-shown">{{ STEAM_USERS }}</b>
+
+			{% if not S_IS_RHEA %}
+				<span class="imageset icon-steam-plug{{ S_31_ICON_DARK }}" title="{{ lang('STEAM_STATE') }}"></span>
+			{% else %}
+				<i class="icon fa-plug fa-fw icon-lg" aria-hidden="true" title="{{ lang('STEAM_STATE') }}"></i>
+			{% endif %}
+			<select class="steam-dropdown stats-online" name="steam-state" id="steam-state"
+					onchange="steam.showSelected();"
+					data-default="{% if STEAMSUITE_DEFAULT_CONTENT == 'online' || STEAMSUITE_DEFAULT_CONTENT == 'ingame' %}yes{% else %}{{ STEAMSUITE_DEFAULT_CONTENT }}{% endif %}">
+			<option value="none">{{ lang('STEAM_SELECT') }}</option>
+			<option value="all"{% if S_STEAMSUITE_LIST_ONLINE %} disabled="disabled"{% endif %}>{{ lang('ANY_STATE') }} ({{ STEAM_USERS }})</option>
+			{% for steam_state in loops.steam_stats_state %}
+				{% if !steam_state.STEAM_STATE_ID %}
+					<option value="not"{% if S_STEAMSUITE_LIST_ONLINE %} disabled="disabled"{% endif %}>&nbsp;&nbsp;{{ lang('STEAM_ALL_OFFLINE') }} ({{ steam_state.STEAM_STATE_COUNT }})</option>
+					<option value="yes">&nbsp;&nbsp;{{ lang('STEAM_ALL_ONLINE') }} ({{ STEAM_USERS - steam_state.STEAM_STATE_COUNT }})</option>
+				{% else %}
+					<option value="{{ steam_state.STEAM_STATE_ID }}">&nbsp;&nbsp;&nbsp;&nbsp;{{ steam_state.STEAM_STATE }} ({{ steam_state.STEAM_STATE_COUNT }})</option>
+				{% endif %}
+			{% endfor %}
+			</select>
+			{% if not S_IS_RHEA %}
+				<span class="imageset icon-steam-gamepad{{ S_31_ICON_DARK }}" title="{{ lang('STEAM_GAME') }}"></span>
+			{% else %}
+				<i class="icon fa-gamepad fa-fw icon-lg" aria-hidden="true" title="{{ lang('STEAM_GAME') }}"></i>
+			{% endif %}
+			<select class="steam-dropdown stats-ingame" name="steam-game" id="steam-game"
+					onchange="steam.showSelected();"
+					data-default="{% if STEAMSUITE_DEFAULT_CONTENT == 'online' %}all{% elseif STEAMSUITE_DEFAULT_CONTENT == 'ingame' %}yes{% else %}{{ STEAMSUITE_DEFAULT_CONTENT }}{% endif %}">
+			<option value="none">{{ lang('STEAM_SELECT') }}</option>
+			<option value="all">{{ lang('ANY_GAME') }} ({{ STEAM_USERS }})</option>
+			{% for steam_game in loops.steam_stats_game %}
+				{% if !steam_game.STEAM_GAME_ID %}
+					<option value="not">&nbsp;&nbsp;{{ lang('STEAM_NOT_IN_GAME') }} ({{ steam_game.STEAM_GAME_COUNT }})</option>
+					<option value="yes">&nbsp;&nbsp;{{ lang('STEAM_IN_GAME') }} ({{ STEAM_USERS - steam_game.STEAM_GAME_COUNT }})</option>
+				{% else %}
+					<option value="{{ steam_game.STEAM_GAME_ID }}">&nbsp;&nbsp;&nbsp;&nbsp;{{ steam_game.STEAM_GAME }} ({{ steam_game.STEAM_GAME_COUNT }})</option>
+				{% endif %}
+			{% endfor %}
+			</select>
+		</div>
+
+		{# Resize Viewport #}
+		<a href="javascript:steam.growShrink('shrink');"
+			id="steam-shrink" class="steam-btn steam-lines steam-minus"
+			title="{{ lang('STEAM_VP_SHRINK_TITLE') }}"
+			style="display: none; line-height: 0;"
+			></a>
+		<a href="javascript:steam.growShrink('grow');"
+			id="steam-grow" class="steam-btn steam-lines steam-plus"
+			title="{{ lang('STEAM_VP_GROW_TITLE') }}"
+			style="display: none; line-height: 0;"
+			></a>
+		{# Resize Viewport #}
+		{# Reset Viewport configuration #}
+		<a href="javascript:steam.confirmResetConfig();"
+			id="steam-reset" class="steam-btn steam-reset steam-cross"
+			title="{{ lang('STEAM_VP_RESET_TITLE') }}"
+			style="display: none; line-height: 0;"
+			></a>
+		{# Reset Viewport configuration #}
+		{# Save Viewport configuration #}
+		<a href="javascript:steam.confirmSaveConfig();"
+			id="steam-save" class="steam-btn steam-save steam-circle"
+			title="{{ lang('STEAM_VP_SAVE_TITLE') }}"
+			style="display: none; line-height: 0;"
+			></a>
+		{# Save Viewport configuration #}
+		{# Collapsible Viewport #}
+		<a href="javascript:steam.showHide();"
+			id="steam-collapse" class="steam-btn steam-collapse"
+			title="{{ lang('STEAM_VP_COLLAPSE_TITLE') }}"
+			style="display: none; line-height: 0;"
+			data-default="no"
+			></a>
+		{# Collapsible Viewport #}
+
+		<div id="steam-container"
+				class="flex-container{% if S_STEAMSUITE_PANEL_CENTER %} panel-center{% endif %}{% if S_STEAMSUITE_PANEL_AVATAR_SMALL %} panel-small{% endif %}"
+				data-default="{{ STEAM_VIEWROWS }}" data-storage="{{ STEAM_STORAGE }}">
+			{% for steam_group in loops.steam_group %}
+				<div class="flex-item">
+				{% if steam_group.STEAM_ID %}
+					<div class="flex-cell {% if steam_group.S_STEAM_PROFILE_PUBLIC or S_STEAMSUITE_ADMIN %}steam-state-{{ steam_group.STEAM_STATE_ID }} steam-game-{{ steam_group.STEAM_INGAME_ID }}{% else %}steam-state-0 steam-game-0{% endif %}">
+						<div class="flex-avatar">
+							<a href="{{ steam_group.U_STEAM_PROFILE }}" title="{{ steam_group.STEAM_NAME }}">
+								<img class="lazy-steam-avatar" style="display: block;" data-original="{% if S_STEAMSUITE_PANEL_AVATAR_SMALL %}{{ steam_group.STEAM_AVATAR }}{% else %}{{ steam_group.STEAM_AVATAR_MEDIUM }}{% endif %}" alt="{{ steam_group.STEAM_NAME }}">
+								<noscript><img src="{% if S_STEAMSUITE_PANEL_AVATAR_SMALL %}{{ steam_group.STEAM_AVATAR }}{% else %}{{ steam_group.STEAM_AVATAR_MEDIUM }}{% endif %}" alt=""></noscript>
+							</a>
+						</div>
+						<div class="flex-column">
+							<div class="flex-text"><a href="{{ steam_group.U_STEAM_PROFILE }}">{{ steam_group.STEAM_NAME }}</a></div>
+							{% if steam_group.S_STEAM_PROFILE_PUBLIC or S_STEAMSUITE_ADMIN %}
+							<div class="flex-text">{% if not steam_group.S_STEAM_PROFILE_PUBLIC %}{% if S_IS_RHEA %}<i class="icon fa-lock fa-fw icon-sm" aria-hidden="true" title="{{ lang('STEAM_UNKNOWN') }}">&nbsp;</i>{% else %}<span class="imageset icon-steam-private{{ S_31_ICON_DARK }}" title="{{ lang('STEAM_UNKNOWN') }}"></span>{% endif %}{% endif %}{{ steam_group.STEAM_STATE }}</div>
+							<div class="flex-text">{% if not steam_group.S_STEAM_PROFILE_PUBLIC %}{% if S_IS_RHEA %}<i class="icon fa-lock fa-fw icon-sm" aria-hidden="true" title="{{ lang('STEAM_UNKNOWN') }}">&nbsp;</i>{% else %}<span class="imageset icon-steam-private{{ S_31_ICON_DARK }}" title="{{ lang('STEAM_UNKNOWN') }}"></span>{% endif %}{% endif %}{{ steam_group.STEAM_INGAME }}</div>
+							{% else %}
+							<div class="flex-text">{{ lang('STEAM_UNKNOWN') }}</div>
+							{% endif %}
+						</div>
+					</div>
+				{% endif %}
+				</div>
+			{% endfor %}
+		</div>
+	</div>
+</div>
+<div id="steamsaveconfirm" class="hidden" data-save="{{ lang('STEAM_VP_SAVE_CONFIRM') }}" data-reset="{{ lang('STEAM_VP_RESET_CONFIRM') }}">
+	<h3>{L_CONFIRM}</h3>
+	<p></p>
+	<fieldset class="submit-buttons">
+		<input type="button" name="confirm" value="{L_YES}" class="button2" />&nbsp;
+		<input type="button" name="cancel" value="{L_NO}" class="button2" />
+	</fieldset>
+</div>

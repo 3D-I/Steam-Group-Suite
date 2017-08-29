@@ -1,0 +1,67 @@
+{% if S_STEAM_ACP_USER %}
+	</fieldset>
+	<fieldset>
+		<legend>{{ lang('ACP_STEAM_USER_SETTINGS') }}</legend>
+		{% if not S_ERROR %}
+			{% if S_STEAM_ID_NOTFOUND %}
+			<div class="errorbox">
+				<p>{{ lang('STEAMSUITE_STEAM_ID_NOTFOUND') }}</p>
+			</div>
+			{% elseif S_STEAM_ID_CHANGED %}
+			<div class="errorbox">
+				<p>{{ lang('STEAMSUITE_STEAM_ID_CHANGED') }}</p>
+			</div>
+			{% endif %}
+		{% endif %}
+	
+	<dl>
+		<dt>
+			<label for="steam_id">{{ lang('ACP_STEAM_ID') }}{{ lang('COLON') }}</label><br /><span>{{ lang('ACP_STEAM_ID_EXPLAIN') }}</span>
+		</dt>
+		{# 
+			No need to press submit twice if you MOVE the focus out of the field
+			the JS autoupdates it automatically
+
+			@todo: a visual icon in progress to let the user know that - note to 3Di ;)
+		#}
+		<dd>
+			<input type="text" name="steam_id" id="steam_id" size="17" class="input" value="{{ STEAM_ID }}" title="{{ lang('STEAMSUITE_USER_GROUP_ID_INVALID') }}" autocomplete="off" onchange="this.form.submit();" />
+		</dd>
+	</dl>
+	
+	{% if STEAM_ID %}
+		{% if STEAM_NAME %}
+		<dl>
+			<dt>
+				<label for="steam_name">{{ lang('ACP_STEAM_NAME') }}{{ lang('COLON') }}</label>
+			</dt>
+			<dd>
+				<strong name="steam_name" id="steam_name"><a href="{{ U_STEAM_PROFILE_URL }}">{{ STEAM_NAME }}</a></strong>
+			</dd>
+		</dl>
+		
+		{% if U_STEAM_PROFILE_URL and STEAM_AVATAR %}
+		<dl>
+			<dt>
+				<label for="steam_profileurl">{{ lang('ACP_STEAM_AVATAR_PROFILE') }}{{ lang('COLON') }}</label><br /><span>{{ lang('ACP_STEAM_AVATAR_PROFILE_EXPLAIN') }}</span>
+			</dt>
+			<dd>
+				<a name="steam_profileurl" id="steam_profileurl" href="{{ U_STEAM_PROFILE_URL }}"><img src="{{ STEAM_AVATAR }}" title="{{ STEAM_NAME }}" alt="" /></a>
+			</dd>
+		</dl>
+		{% endif %}
+		<hr/>
+		{% endif %}
+
+		<dl>
+			<dt>
+				<label for="steam_profile_visible">{{ lang('ACP_STEAM_PROFILE_VISIBLE') }}{{ lang('COLON') }}</label><br /><span>{{ lang('ACP_STEAM_PROFILE_VISIBLE_EXPLAIN') }}</span>
+			</dt>
+			<dd>
+				<label for="steam_profile_visible"><input type="radio" name="steam_profile_visible" value="1"{% if S_STEAM_PROFILE_VISIBLE %} checked="checked"{% endif %} /> {{ lang('YES') }}</label>
+				<label for="steam_profile_visible"><input type="radio" name="steam_profile_visible" value="0"{% if not S_STEAM_PROFILE_VISIBLE %} checked="checked"{% endif %} /> {{ lang('NO') }}</label>
+			</dd>
+		</dl>
+	{% endif %}
+
+{% endif %}

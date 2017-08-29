@@ -1,0 +1,147 @@
+	<fieldset class="steamsuite-acp-outer">
+		<legend>{{ lang('ACP_STEAM_SETTINGS_VIEWPORT_GENERAL') }}</legend>
+
+		<fieldset class="steamsuite-acp-middle">
+			<legend>{{ lang('ACP_STEAM_SETTINGS_VIEWPORT') }}</legend>
+			<fieldset class="steamsuite-acp-inner">
+				<legend>{{ lang('ACP_STEAM_TEMPLATE_LOCATIONS') }}</legend>
+				<dl>
+					<dt>
+						<label for="threedi_steamsuite_index">{{ lang('STEAMSUITE_INDEX') }}{{ lang('COLON') }}</label><br />{{ lang('STEAMSUITE_INDEX_EXPLAIN') }}
+					</dt>
+					<dd>
+						<input type="radio" class="radio" name="threedi_steamsuite_index" value="1"{% if STEAMSUITE_INDEX %} checked="checked"{% endif %}/> {{ lang('STEAMSUITE_TOP') }} &nbsp;
+						<input type="radio" class="radio" name="threedi_steamsuite_index" value="0"{% if not STEAMSUITE_INDEX %} checked="checked"{% endif %} /> {{ lang('STEAMSUITE_BOTTOM') }}
+					</dd>
+				</dl>
+
+				<dl>
+					<dt>
+						<label for="threedi_steamsuite_forums">{{ lang('STEAMSUITE_FORUMS') }}{{ lang('COLON') }}</label><br />{{ lang('STEAMSUITE_FORUMS_EXPLAIN') }}
+					</dt>
+					<dd>
+						<input type="radio" class="radio" name="threedi_steamsuite_forums" value="1"{% if STEAMSUITE_FORUMS %} checked="checked"{% endif %}/> {{ lang('YES') }} &nbsp;
+						<input type="radio" class="radio" name="threedi_steamsuite_forums" value="0"{% if not STEAMSUITE_FORUMS %} checked="checked"{% endif %} /> {{ lang('NO') }}
+					</dd>
+				</dl>
+			</fieldset>
+			<fieldset class="steamsuite-acp-inner">
+				<legend>{{ lang('ACP_STEAM_SETTINGS_VIEWPORT_STYLING') }}</legend>
+				<dl>
+					<dt>
+						<label for="threedi_steamsuite_default_content">{{ lang('STEAMSUITE_DEFAULT_CONTENT') }}{{ lang('COLON') }}</label><br />{{ lang('STEAMSUITE_DEFAULT_CONTENT_EXPLAIN') }}
+					</dt>
+					<dd>
+						<input type="radio" class="radio" name="threedi_steamsuite_default_content" value="none"{% if STEAMSUITE_DEFAULT_CONTENT == "none" %} checked="checked"{% endif %}/> {{ lang('STEAMSUITE_CONTENT_NONE') }} &nbsp;
+						<input type="radio" class="radio" name="threedi_steamsuite_default_content" value="ingame"{% if STEAMSUITE_DEFAULT_CONTENT == "ingame" %} checked="checked"{% endif %}/> {{ lang('STEAMSUITE_CONTENT_INGAME') }} &nbsp;
+						<input type="radio" class="radio" name="threedi_steamsuite_default_content" value="online"{% if STEAMSUITE_DEFAULT_CONTENT == "online" %} checked="checked"{% endif %}/> {{ lang('STEAMSUITE_CONTENT_ONLINE') }} &nbsp;
+						<input type="radio" class="radio" name="threedi_steamsuite_default_content" value="all"{% if STEAMSUITE_DEFAULT_CONTENT == "all" %} checked="checked"{% endif %}/> {{ lang('STEAMSUITE_CONTENT_ALL') }} &nbsp;
+					</dd>
+				</dl>
+
+				<dl>
+					<dt>
+						<label for="threedi_steamsuite_panel_center">{{ lang('STEAMSUITE_PANEL_CENTER') }}{{ lang('COLON') }}</label><br />{{ lang('STEAMSUITE_PANEL_CENTER_EXPLAIN') }}
+					</dt>
+					<dd>
+						<input type="radio" class="radio" name="threedi_steamsuite_panel_center" value="1"{% if STEAMSUITE_PANEL_CENTER %} checked="checked"{% endif %}/> {{ lang('STEAMSUITE_PANEL_CENTERED') }} &nbsp;
+						<input type="radio" class="radio" name="threedi_steamsuite_panel_center" value="0"{% if not STEAMSUITE_PANEL_CENTER %} checked="checked"{% endif %} /> {{ lang('STEAMSUITE_PANEL_PACKED') }}
+					</dd>
+				</dl>
+
+				<dl>
+					<dt>
+						<label for="threedi_steamsuite_ttl_rows">{{ lang('STEAMSUITE_NUM_USERS_ROWS') }}{{ lang('COLON') }}</label><br />{L_STEAMSUITE_NUM_USERS_ROWS_EXPLAIN}
+					</dt>
+					<dd>
+						<input type="number" min="0" name="threedi_steamsuite_ttl_rows" id="threedi_steamsuite_ttl_rows" size="6" value="{STEAMSUITE_ROWS}" />
+					</dd>
+				</dl>
+
+				<dl>
+					<dt>
+						<label for="threedi_steamsuite_avatar_panel_small">{{ lang('STEAMSUITE_AVATAR_PANEL_SMALL') }}{{ lang('COLON') }}</label><br />{{ lang('STEAMSUITE_AVATAR_PANEL_SMALL_EXPLAIN') }}
+					</dt>
+					<dd>
+						<input type="radio" class="radio" name="threedi_steamsuite_avatar_panel_small" value="1" {% if STEAMSUITE_AVATAR_PANEL_SMALL %}checked="checked"{% endif %}/> {{ lang('YES') }} &nbsp;
+						<input type="radio" class="radio" name="threedi_steamsuite_avatar_panel_small" value="0" {% if not STEAMSUITE_AVATAR_PANEL_SMALL %}checked="checked"{% endif %} /> {{ lang('NO') }}
+					</dd>
+				</dl>
+
+				<dl>
+					<dt>
+						<label for="threedi_steamsuite_list_online">{{ lang('STEAMSUITE_LIST_ONLINE') }}{{ lang('COLON') }}</label><br />{{ lang('STEAMSUITE_LIST_ONLINE_EXPLAIN') }}
+					</dt>
+					<dd>
+						<input type="radio" class="radio" name="threedi_steamsuite_list_online" value="0" {% if not STEAMSUITE_LIST_ONLINE %}checked="checked"{% endif %} /> {{ lang('STEAMSUITE_USERS_ALL') }} &nbsp;
+						<input type="radio" class="radio" name="threedi_steamsuite_list_online" value="1" {% if STEAMSUITE_LIST_ONLINE %}checked="checked"{% endif %}/> {{ lang('STEAMSUITE_USERS_ONLINE') }}
+					</dd>
+				</dl>
+			</fieldset>
+		</fieldset>
+
+		<fieldset class="steamsuite-acp-middle">
+			<legend>{{ lang('ACP_STEAM_SETTINGS_PROFILES') }}</legend>
+			<fieldset class="steamsuite-acp-inner">
+				<legend>{{ lang('STEAMSUITE_DEFAULT_AVATAR') }}</legend>
+				<div class="steamsuite-acp-rules">{{ lang('STEAMSUITE_DEFAULT_AVATAR_EXPLAIN') }}</div>
+				{# 
+					0 == false == never, 1 == true == default, 2 == true == always
+				#}
+				</dl>
+				<dl>
+					<dt>
+						<label for="threedi_steamsuite_default_avatar">{{ lang('STEAMSUITE_DEFAULT_AVATAR_NEVER') }}{{ lang('COLON') }}</label><br />{{ lang('STEAMSUITE_DEFAULT_AVATAR_NEVER_EXPLAIN') }}
+					</dt>
+					<dd>
+						<input type="radio" class="radio" name="threedi_steamsuite_default_avatar" value="0" {% if STEAMSUITE_DEFAULT_AVATAR == 0 %}checked="checked"{% endif %} />  {{ lang('STEAMSUITE_DEFAULT_AVATAR_NO_THANKS') }}
+					</dd>
+				</dl>
+
+				<dl>
+					<dt>
+						<label for="threedi_steamsuite_default_avatar">{{ lang('STEAMSUITE_DEFAULT_AVATAR_DEFAULT') }}{{ lang('COLON') }}</label><br />{{ lang('STEAMSUITE_DEFAULT_AVATAR_DEFAULT_EXPLAIN') }}
+					</dt>
+					<dd>
+						<input type="radio" class="radio" name="threedi_steamsuite_default_avatar" value="1" {% if STEAMSUITE_DEFAULT_AVATAR == 1 %}checked="checked"{% endif %} />  {{ lang('STEAMSUITE_DEFAULT_AVATAR_YES_USE') }}
+					</dd>
+				</dl>
+
+				<dl>
+					<dt>
+						<label for="threedi_steamsuite_default_avatar">{{ lang('STEAMSUITE_DEFAULT_AVATAR_REPLACE') }}{{ lang('COLON') }}</label><br />{{ lang('STEAMSUITE_DEFAULT_AVATAR_REPLACE_EXPLAIN') }}
+					</dt>
+					<dd>
+						<input type="radio" class="radio" name="threedi_steamsuite_default_avatar" value="2" {% if STEAMSUITE_DEFAULT_AVATAR == 2 %}checked="checked"{% endif %} /> {{ lang('STEAMSUITE_DEFAULT_AVATAR_YES_REPLACE') }}
+					</dd>
+				</dl>
+			</fieldset>
+
+			<fieldset class="steamsuite-acp-inner">
+				<legend>{{ lang('ACP_STEAM_SETTINGS_MINIPROFILE') }}</legend>
+				<dl>
+					<dt>
+						<label for="threedi_steamsuite_miniprofile">{{ lang('STEAMSUITE_ALLOW_MINIPROFILE') }}{{ lang('COLON') }}</label><br />{{ lang('STEAMSUITE_ALLOW_MINIPROFILE_EXPLAIN') }}
+					</dt>
+					<dd>
+						<input type="radio" class="radio" name="threedi_steamsuite_miniprofile" value="0" {% if STEAMSUITE_ALLOW_MINIPROFILE == 0 %}checked="checked"{% endif %} /> {{ lang('STEAMSUITE_MINIPROFILE_NEVER') }} &nbsp;
+						<input type="radio" class="radio" name="threedi_steamsuite_miniprofile" value="1" {% if STEAMSUITE_ALLOW_MINIPROFILE == 1 %}checked="checked"{% endif %} /> {{ lang('STEAMSUITE_MINIPROFILE_ONCLICK') }} &nbsp;
+						<input type="radio" class="radio" name="threedi_steamsuite_miniprofile" value="2" {% if STEAMSUITE_ALLOW_MINIPROFILE == 2 %}checked="checked"{% endif %} /> {{ lang('STEAMSUITE_MINIPROFILE_FIXED') }}
+					</dd>
+				</dl>
+			</fieldset>
+
+			<fieldset class="steamsuite-acp-inner">
+				<legend>{{ lang('ACP_STEAM_SETTINGS_PROFILE') }}</legend>
+				<dl>
+					<dt>
+						<label for="threedi_steamsuite_avatar_profile_big">{{ lang('STEAMSUITE_AVATAR_PROFILE_BIG') }}{{ lang('COLON') }}</label><br />{{ lang('STEAMSUITE_AVATAR_PROFILE_BIG_EXPLAIN') }}
+					</dt>
+					<dd>
+						<input type="radio" class="radio" name="threedi_steamsuite_avatar_profile_big" value="1" {% if STEAMSUITE_AVATAR_PROFILE_BIG %}checked="checked"{% endif %}/> {{ lang('YES') }} &nbsp;
+						<input type="radio" class="radio" name="threedi_steamsuite_avatar_profile_big" value="0" {% if not STEAMSUITE_AVATAR_PROFILE_BIG %}checked="checked"{% endif %} /> {{ lang('NO') }}
+					</dd>
+				</dl>
+			</fieldset>
+		</fieldset>
+	</fieldset>

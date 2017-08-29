@@ -1,0 +1,89 @@
+<style>
+
+/*
+Colors are set according to user configuration in ACP.
+*/
+
+
+/* Viewport */
+
+/* Item background color */
+.flex-item {
+	background-color: {{ VIEWPORT_BKG }};
+}
+
+/* Avatar frame color - default offline */
+.flex-cell > .flex-avatar {
+	border-color: {{ VIEWPORT_OFFLINE }};
+}
+
+/* Avatar frame color - online */
+.flex-cell:not(.steam-state-0) > .flex-avatar {
+	border-color: {{ VIEWPORT_ONLINE }};
+}
+
+/* Avatar frame color - online ingame */
+.flex-cell:not(.steam-state-0):not(.steam-game-0) > .flex-avatar {
+	border-color: {{ VIEWPORT_INGAME }};
+}
+
+/* Text color - default offline */
+.flex-cell .flex-column,
+.flex-cell .flex-column a {
+	color: {{ VIEWPORT_OFFLINE }};;
+}
+
+/* Text color - online */
+.flex-cell:not(.steam-state-0) > .flex-column,
+.flex-cell:not(.steam-state-0) > .flex-column a {
+	color: {{ VIEWPORT_ONLINE }};
+}
+
+/* Text color - online ingame */
+.flex-cell:not(.steam-state-0):not(.steam-game-0) > .flex-column,
+.flex-cell:not(.steam-state-0):not(.steam-game-0) > .flex-column a {
+	color: {{ VIEWPORT_INGAME }};
+}
+
+
+/* Viewtopic & viewprofile */
+
+/* Item background color */
+.profile-steam .steam-cell.vt {
+	background-color: {{ VIEWTOPIC_BKG }};
+}
+
+/* Avatar frame color - default offline */
+.steam-cell .flex-avatar {
+	border-color: {{ VIEWTOPIC_OFFLINE }};
+}
+
+/* Avatar frame color - online */
+.steam-cell .flex-avatar.steam-online {
+	border-color: {{ VIEWTOPIC_ONLINE }};
+}
+
+/* Avatar frame color - online ingame */
+.steam-cell .flex-avatar.steam-ingame {
+	border-color: {{ VIEWTOPIC_INGAME }};
+}
+
+/* Text color - default offline */
+.profile-steam .steam-cell .flex-column,
+.profile-steam .steam-cell .flex-column a {
+	color: {{ VIEWTOPIC_OFFLINE }};
+}
+
+/* Text color - online */
+.profile-steam .steam-cell .flex-column.steam-online,
+.profile-steam .steam-cell .flex-column.steam-online a {
+	color: {{ VIEWTOPIC_ONLINE }};
+}
+
+/* Text color - online ingame */
+.profile-steam .steam-cell .flex-column.steam-ingame,
+.profile-steam .steam-cell .flex-column.steam-ingame a {
+	color: {{ VIEWTOPIC_INGAME }};
+}
+
+</style>

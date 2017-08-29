@@ -1,0 +1,87 @@
+{% include 'ucp_header.html' %}
+
+<form id="ucp" method="post" action="{{ S_UCP_ACTION }}">
+<h2>{{ lang('UCP_STEAM_SETTINGS') }}</h2>
+	<div class="panel">
+		<div class="inner">
+			<fieldset>
+				{# Not invasive errors report #}
+				{% if S_ERRORS %}<p class="error">{{ ERRORS_MSG }}</p>{% endif %}
+				{% if S_STEAM_LOGIN %}
+				<div class="rules">{{ lang('UCP_SIGN_IN_THROUGH_STEAM_HELPLINE') }}</div>
+				<dl>
+					<dt>
+						<label for="steam_id">{{ lang('UCP_SIGN_IN_THROUGH_STEAM') }}{{ lang('COLON') }}</label><br /><span>{{ lang('UCP_SIGN_IN_THROUGH_STEAM_EXPLAIN') }}</span>
+					</dt>
+					<br>
+					<dd>
+						<input type="image" formaction="{{ S_UCP_ACTION }}&login" formmethod="post" src="http://cdn.steamcommunity.com/public/images/signinthroughsteam/sits_01.png">
+					</dd>
+				</dl>
+				{% else %}
+				<h3>{{ lang('UCP_STEAM_INFORMATION') }}</h3>
+				<dl>
+					<dt>
+						<label for="steam_id">{{ lang('UCP_STEAM_ID') }}{{ lang('COLON') }}</label><br /><span>{{ lang('UCP_STEAM_ID_EXPLAIN') }}</span>
+					</dt>
+					<dd>
+						<input type="text" name="steam_id" id="steam_id" readonly="readonly" size="17" class="input" value="{{ STEAM_ID }}" />
+					</dd>
+				</dl>
+				{% if STEAM_ID and STEAM_NAME %}
+				<dl>
+					<dt>
+						<label for="steam_name">{{ lang('UCP_STEAM_NAME') }}{{ lang('COLON') }}</label>
+					</dt>
+					<dd>
+						<strong name="steam_name" id="steam_name"><a href="{{ U_STEAM_PROFILE_URL }}">{{ STEAM_NAME }}</a></strong>
+					</dd>
+				</dl>
+				{% endif %}
+				{% if STEAM_ID and U_STEAM_PROFILE_URL and STEAM_AVATAR %}
+				<dl>
+					<dt>
+						<label for="steam_profileurl">{{ lang('UCP_STEAM_AVATAR_PROFILE') }}{{ lang('COLON') }}</label><br /><span>{{ lang('UCP_STEAM_AVATAR_PROFILE_EXPLAIN') }}</span>
+					</dt>
+					{# 
+						Not sure is a good idea to use target blank here. HTML5 says it's ok. 
+					#}
+					<dd>
+						<a name="steam_profileurl" id="steam_profileurl" href="{{ U_STEAM_PROFILE_URL }}" target="_blank"><img src="{{ STEAM_AVATAR }}" title="{{ STEAM_NAME }}" alt="" /></a>
+					</dd>
+				</dl>
+				{% endif %}
+				<br>
+				<h3>{{ lang('UCP_STEAM_LOCAL_CONFIG') }}</h3>
+				<dl>
+					<dt>
+						<label for="steam_profile_visible">{{ lang('UCP_STEAM_PROFILE_VISIBLE') }}{{ lang('COLON') }}</label><br /><span>{{ lang('UCP_STEAM_PROFILE_VISIBLE_EXPLAIN') }}</span>
+					</dt>
+					<dd>
+						<label for="steam_profile_visible"><input type="radio" name="steam_profile_visible" value="1"{% if S_STEAM_PROFILE_VISIBLE %} checked="checked"{% endif %} /> {{ lang('YES') }}</label>
+						<label for="steam_profile_visible"><input type="radio" name="steam_profile_visible" value="0"{% if not S_STEAM_PROFILE_VISIBLE %} checked="checked"{% endif %} /> {{ lang('NO') }}</label>
+					</dd>
+				</dl>
+				{% endif %}
+			</fieldset>
+		</div>
+	</div>
+	{% if not S_STEAM_LOGIN %}
+	<fieldset>
+		<dl>
+			<dt>&nbsp;</dt>
+			<dd>
+				<input type="submit" name="submit" id="submit" class="button1" value="{{ lang('CONFIRM') }}"/>&nbsp;
+				{% if S_STEAM_MAY_DELETE %}
+				<input type="submit" name="delete" id="delete" class="button1" value="{{ lang('DELETE') }}"/>&nbsp;
+				{% endif %}
+				<input type="submit" name="cancel" id="cancel" class="button2" value="{{ lang('CANCEL') }}" formaction="{{ S_UCP_ACTION }}" formmethod="post"/>
+			</dd>
+		</dl>
+		{{ S_HIDDEN_FIELDS }}
+		{{ S_FORM_TOKEN }}
+	</fieldset>
+	{% endif %}
+</form>
+
+{% include 'ucp_footer.html' %}

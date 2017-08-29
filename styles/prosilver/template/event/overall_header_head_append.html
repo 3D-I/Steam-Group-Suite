@@ -1,0 +1,8 @@
+{% if S_STEAMSUITE and not INCLUDED_STEAMSUITE_CSS %}
+	{% INCLUDECSS '@threedi_steamsuite/steamsuite.css' %}
+	{% set INCLUDED_STEAMSUITE_CSS = true %}
+	{% if not S_IS_RHEA %}
+	{% INCLUDECSS '@threedi_steamsuite/steamsuite31.css' %}
+	{% endif %}
+	{% INCLUDECSS '@threedi_steamsuite/steamcollapse.css' %}
+{% endif %}

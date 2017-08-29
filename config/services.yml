@@ -1,0 +1,34 @@
+imports:
+    - { resource: parameters.yml }
+    - { resource: gravatar.yml }
+
+services:
+    threedi.steamsuite.listener:
+        class: threedi\steamsuite\event\listener
+        arguments:
+            - '@auth'
+            - '@config'
+            - '@user'
+            - '@request'
+            - '@template'
+            - '@log'
+            - '@threedi.steamsuite.steamsuite'
+        tags:
+            - { name: event.listener }
+
+    threedi.steamsuite.steamsuite:
+        class: threedi\steamsuite\core\steamsuite
+        arguments:
+            - '@config'
+            - '@config_text'
+            - '@dbal.conn'
+            - '@user'
+            - '%threedi.steamsuite.tables.steam_suite_table%'
+            - '@log'
+
+    threedi.steamsuite.steamsuite_auth:
+        class: threedi\steamsuite\openid\openid_authenticate
+        arguments:
+            - '@request'
+            - '%threedi.steamsuite.openid_provider%'
+
