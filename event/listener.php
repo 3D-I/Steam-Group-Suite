@@ -381,9 +381,9 @@ class listener implements EventSubscriberInterface
 		$event_row = $event['row'];
 
 		/**
-		 * Check for Steam permissions first.
+		 * Check the Steam permissions and indexes existance first.
 		 */
-		if ($event_row['steam_profile_visible'] && $this->auth->acl_get('u_allow_steamsuite_view') || $this->auth->acl_get('a_steamsuite_admin'))
+		if (!empty($event_row['steam_profile_visible']) && $this->auth->acl_get('u_allow_steamsuite_view') || $this->auth->acl_get('a_steamsuite_admin'))
 		{
 			/**
 			 * Check for avatar and ACP settings first:
@@ -391,7 +391,7 @@ class listener implements EventSubscriberInterface
 			 * or configuration is set to use steam avatar always if available
 			 * then check for steam_id's and related data existance
 			 */
-			if ( (empty($event_row['avatar']) || ((int) $this->config['threedi_steamsuite_default_avatar'] == 2)) && ($event_row['steam_id']) && ($steam_profile = $this->steamsuite->get_profile_data($event_row['steam_id'])) )
+			if ( (empty($event_row['avatar']) || ((int) $this->config['threedi_steamsuite_default_avatar'] == 2)) && (!empty($event_row['steam_id'])) && ($steam_profile = $this->steamsuite->get_profile_data($event_row['steam_id'])) )
 			{
 				/**
 				 * Uses the maximum avatar size possible within the specified configuration
