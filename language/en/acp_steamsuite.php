@@ -77,6 +77,9 @@ $lang = array_merge($lang, array(
 	'STEAMSUITE_REFRESH_OVERDUE'				=>	'<strong>Refresh time overdue</strong>. For some reason, the Steam information refresh has not been successful. <em>Please, review the Core Steam configuration.</em>',
 	'STEAMSUITE_NEVER'							=>	'None yet',
 	'STEAMSUITE_OVERDUE'						=>	'Overdue!',
+	// ACP/administer user/profile
+	'STEAMSUITE_USER_GROUP_ID_NOT_IN_GROUP'		=> '<strong>Steam User ID invalid</strong>, it does not belong to the Group.',
+	'STEAMSUITE_USER_GROUP_ID_TAKEN'			=> '<strong>Steam User ID invalid</strong>, it has been already taken.',
 
 	//ACP keys: settings
 	'STEAMSUITE_DEFAULT_CONTENT'				=>	'Viewport default content',
