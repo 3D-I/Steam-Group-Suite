@@ -38,15 +38,4 @@ class install_user_schema_rc2 extends \phpbb\db\migration\migration
 			),
 		);
 	}
-
-	public function revert_schema()
-	{
-		return array(
-			'change_columns'	=> array(
-				$this->table_prefix . 'steam_suite'		=> array(
-					'gameid'		=> array('UINT', '0'),
-				),
-			),
-		);
-	}
 }
