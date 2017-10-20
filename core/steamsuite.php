@@ -472,6 +472,7 @@ class steamsuite
 				{
 					$players[$list_ids_group[$player['steamid']]] = $player;
 				}
+			}
 		}
 		ksort($players);
 
