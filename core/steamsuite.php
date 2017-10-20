@@ -442,7 +442,7 @@ class steamsuite
 			{
 				$group_details = $curl_response['groupDetails'];
 			}
-			$list_ids_group = array_merge($list_ids_group, $curl_response['members']['steamID64']);
+			$list_ids_group = array_merge($list_ids_group, (array) $curl_response['members']['steamID64']);
 		}
 		while ((int) $curl_response['currentPage'] < (int) $curl_response['totalPages']);
 
@@ -465,10 +465,13 @@ class steamsuite
 				return;
 			}
 
+			/* Now we get member details if exist (due to the API's bug: group with no members yet) */
 			foreach ($curl_response['players']['player'] as $player)
 			{
-				$players[$list_ids_group[$player['steamid']]] = $player;
-			}
+				if (is_array($player))
+				{
+					$players[$list_ids_group[$player['steamid']]] = $player;
+				}
 		}
 		ksort($players);
 
