@@ -34,7 +34,7 @@ if (empty($lang) || !is_array($lang))
 // in a url you again do not need to specify an order e.g., 'Click %sHERE%s' is fine
 
 $lang = array_merge($lang, array(
-	'ERROR_MSG_3111_321_MISTMATCH'	=>	'Minimum 3.1.11 but less than 3.2.0@dev OR greater than 3.2.1',
+	'ERROR_MSG_3111_321_MISTMATCH'	=>	'Minimum 3.1.11 but less than 3.2.0@dev OR greater than 3.2.1 but less than 3.3.0@dev',
 	'ERROR_MSG_SIMPLEXML'			=>	'PHP function "simplexml_load_string" not installed',
 	'ERROR_MSG_ICONV'				=>	'PHP function "iconv" not installed',
 	'ERROR_MSG_CURL'				=>	'PHP function "cUrl" not installed',
