@@ -785,7 +785,7 @@ class steamsuite
 	 */
 	public function user_badge($steam_id)
 	{
-		$steam_badge = 'http://badges.steamprofile.com/profile/default/steam/' . $steam_id . '.png';
+		$steam_badge = 'https://badges.steamprofile.com/profile/default/steam/' . $steam_id . '.png';
 
 		return (string) $steam_badge;
 	}
