@@ -62,8 +62,8 @@ class steamsuite_module
 		/* Let's read the style configuration */
 		$color_configs = json_decode($config['threedi_steamsuite_css_colors'], true);
 
-		$api_key = trim($request->variable('threedi_steamsuite_api_key', $config['threedi_steamsuite_api_key']));
-		$group_id = trim($request->variable('threedi_steamsuite_group_id', $config['threedi_steamsuite_group_id']));
+		$api_key = $request->variable('threedi_steamsuite_api_key', $config['threedi_steamsuite_api_key']);
+		$group_id = $request->variable('threedi_steamsuite_group_id', $config['threedi_steamsuite_group_id']);
 
 		/* Vars related to the Steam group */
 		if ($api_key && $group_id)
@@ -129,14 +129,14 @@ class steamsuite_module
 				$config->set('threedi_steamsuite_index', $request->variable('threedi_steamsuite_index', (int) $config['threedi_steamsuite_index']));
 				$config->set('threedi_steamsuite_forums', $request->variable('threedi_steamsuite_forums', (int) $config['threedi_steamsuite_forums']));
 				/* Styles' specific vars */
-				$color_configs['vp_bkg'] = trim($request->variable('vp_bkg', $color_configs['vp_bkg']));
-				$color_configs['vp_ing'] = trim($request->variable('vp_ing', $color_configs['vp_ing']));
-				$color_configs['vp_onl'] = trim($request->variable('vp_onl', $color_configs['vp_onl']));
-				$color_configs['vp_ofl'] = trim($request->variable('vp_ofl', $color_configs['vp_ofl']));
-				$color_configs['vt_bkg'] = trim($request->variable('vt_bkg', $color_configs['vt_bkg']));
-				$color_configs['vt_ing'] = trim($request->variable('vt_ing', $color_configs['vt_ing']));
-				$color_configs['vt_onl'] = trim($request->variable('vt_onl', $color_configs['vt_onl']));
-				$color_configs['vt_ofl'] = trim($request->variable('vt_ofl', $color_configs['vt_ofl']));
+				$color_configs['vp_bkg'] = $request->variable('vp_bkg', $color_configs['vp_bkg']);
+				$color_configs['vp_ing'] = $request->variable('vp_ing', $color_configs['vp_ing']);
+				$color_configs['vp_onl'] = $request->variable('vp_onl', $color_configs['vp_onl']);
+				$color_configs['vp_ofl'] = $request->variable('vp_ofl', $color_configs['vp_ofl']);
+				$color_configs['vt_bkg'] = $request->variable('vt_bkg', $color_configs['vt_bkg']);
+				$color_configs['vt_ing'] = $request->variable('vt_ing', $color_configs['vt_ing']);
+				$color_configs['vt_onl'] = $request->variable('vt_onl', $color_configs['vt_onl']);
+				$color_configs['vt_ofl'] = $request->variable('vt_ofl', $color_configs['vt_ofl']);
 				$color_configs['icondark'] = $request->variable('icondark', $color_configs['icondark']);
 				$config->set('threedi_steamsuite_css_colors', json_encode($color_configs));
 				/* Log the action. */

@@ -22,5 +22,5 @@ $lang = array_merge($lang, array(
 	'STEAM_AVATAR'				=>	'Steam avatar',
 
 	// Translators please do not change the following line, no need to translate it!
-	'STEAMSUITE_CREDIT_LINE'	=>	' | <a href="https://github.com/3D-I/Steam-Group-Suite">Steam Group Suite</a> &copy; 2017 - 3Di',
+	'STEAMSUITE_CREDIT_LINE'	=>	' | <a href="https://github.com/3D-I/Steam-Group-Suite">Steam Group Suite</a> &copy; 2017, 2018 - 3Di',
 ));

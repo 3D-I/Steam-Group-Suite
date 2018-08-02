@@ -10,24 +10,24 @@
 
 namespace threedi\steamsuite\migrations;
 
-class install_config_rc2 extends \phpbb\db\migration\migration
+class install_config_rc4 extends \phpbb\db\migration\migration
 {
 	public function effectively_installed()
 	{
-		return phpbb_version_compare($this->config['threedi_steamsuite'], '1.0.0-rc2', '>=');
+		return phpbb_version_compare($this->config['threedi_steamsuite'], '1.0.0-rc4', '>=');
 	}
 
 	static public function depends_on()
 	{
 		return array(
-			'\threedi\steamsuite\migrations\install_user_schema_rc2',
+			'\threedi\steamsuite\migrations\install_config_rc3',
 		);
 	}
 
 	public function update_data()
 	{
 		return array(
-			array('config.update', array('threedi_steamsuite', '1.0.0-rc2')),
+			array('config.update', array('threedi_steamsuite', '1.0.0-rc4')),
 		);
 	}
 }

@@ -27,13 +27,14 @@ $lang = array_merge($lang, array(
 	'ACP_STEAM_SETTINGS_TITLE'					=>	'Steam Group Suite Settings',
 
 	// ACP error logs
-	'STEAMSUITE_LOG_HTTP_ZERO_ERROR'			=>	'<strong>Quering the Steam Web API provider failed, http = 0.</strong>',
-	'STEAMSUITE_LOG_HTTP_404_ERROR'				=>	'<strong>Quering the Steam Web API provider gave a 404 not found error.</strong>',
-	'STEAMSUITE_LOG_HTTP_NO_AUTH'				=>	'<strong>Quering the Steam Web API provider gave a 403 authorization error.</strong>',
-	'STEAMSUITE_LOG_CURL_COMM_ERROR'			=>	'<strong>Quering the Steam Web API provider ocurrred an undetermined communication error.</strong>',
+	'STEAMSUITE_LOG_HTTP_ZERO_ERROR'			=>	'Quering the Steam Web API provider failed - <strong>http = 0</strong> error.',
+	'STEAMSUITE_LOG_HTTP_404_ERROR'				=>	'Quering the Steam Web API provider gave a <strong>404 not found</strong> error.',
+	'STEAMSUITE_LOG_HTTP_NO_AUTH_ERROR'			=>	'Quering the Steam Web API provider gave a <strong>403 not authorized</strong> error.',
+	'STEAMSUITE_LOG_CURL_COMM_ERROR'			=>	'Quering the Steam Web API provider occurred an <strong>undetermined communication error.</strong>',
 	'STEAMSUITE_LOG_CURL_ERROR'					=>	'The PHP function <strong>cUrl()</strong> seems disabled in your server. Ask for support at your hoster.',
 	'STEAMSUITE_LOG_ICONV_ERROR'				=>	'The PHP function <strong>iconv()</strong> seems disabled in your server. Ask for support at your hoster.',
 	'STEAMSUITE_LOG_SIMPLEXMLLS_ERROR'			=>	'The PHP function <strong>simplexml_load_string()</strong> seems disabled in your server. Ask for support at your hoster.',
+
 	'STEAMSUITE_LOG_CURL_COMM_OK'				=>	'The communication with the Steam Web API provider has been restablished.',
 	'STEAMSUITE_LOG_CURL_OK'					=>	'The PHP function <strong>cUrl()</strong> has been reenabled.',
 	'STEAMSUITE_LOG_ICONV_OK'					=>	'The PHP function <strong>iconv()</strong> has been reenabled.',

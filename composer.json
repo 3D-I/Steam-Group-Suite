@@ -3,8 +3,8 @@
 	"type": "phpbb-extension",
 	"description": "Extension for Steam's lovers.",
 	"homepage": "http://3di.space/32/",
-	"version": "1.0.0-rc3",
-	"time": "2017-10-26",
+	"version": "1.0.0-rc4",
+	"time": "2018-08-02",
 	"license": "GPL-2.0",
 	"authors": [
 		{
