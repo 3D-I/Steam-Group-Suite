@@ -54,11 +54,11 @@ class steamsuite_module
 
 			/**
 			 * Get the Steam ID from the complete identity returned
-			 * (http://steamcommunity.com/openid/id/{HereGoesTheSteamID})
+			 * (https://steamcommunity.com/openid/id/{HereGoesTheSteamID})
 			 */
 			if (!empty($identity))
 			{
-				$ptn = "/^http:\/\/steamcommunity\.com\/openid\/id\/(7[0-9]{15,25}+)$/";
+				$ptn = "/^https:\/\/steamcommunity\.com\/openid\/id\/(7[0-9]{15,25}+)$/";
 				preg_match($ptn, $identity, $matches);
 				$steam_id = $matches[1];
 			}

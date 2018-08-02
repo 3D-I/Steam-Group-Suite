@@ -1,4 +1,0 @@
-Icons are a courtesy of Mannix_ at phpBB [dot com]
-Released under Gpl-v2 license.
-
-Other Icons are public domain.
